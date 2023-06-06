@@ -1,33 +1,9 @@
 import 'package:flutter/material.dart';
-import 'login_do.dart';
-import 'sign_do.dart';
+import 'filter.dart';
+import 'justfoodsearch.dart';
 
-void main() => runApp(MyApp());
-
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title:'Flutter Demo',
-        theme:ThemeData(
-          primarySwatch: Colors.blue,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-        home:MyHomePage(title:'Flutter Demo')
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget{
-  MyHomePage({Key ? key,  required  this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyHomePage createState() => _MyHomePage();
-}
-
-class _MyHomePage extends State<MyHomePage>{
+class Makemeal extends StatelessWidget{
+  const Makemeal({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context){
     return Container(
@@ -78,20 +54,18 @@ class _MyHomePage extends State<MyHomePage>{
             child: Image.asset('assets/images/logo_1.png'),
           ),
           SizedBox(height: 116),
-          SizedBox(height: 29.57),
           Container(
             width: 376.75,
-            height: 66,
-
+            height: 95,
             child: ElevatedButton(
 
                 child: Text(
-                  'Login',
+                  'Make meal!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Allan',
                     fontWeight: FontWeight.w500,
-                    color: Colors.green,
+                    color: Colors.black,
                     fontSize: 32,
                     //fontStyle: FontStyle.italic,
                   ),
@@ -99,7 +73,7 @@ class _MyHomePage extends State<MyHomePage>{
                 onPressed: (){
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginDo()),
+                    MaterialPageRoute(builder: (context) => const Filter()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -113,35 +87,40 @@ class _MyHomePage extends State<MyHomePage>{
 
           ),
 
-          SizedBox(height: 29.57),
+          SizedBox(height: 27),
           Container(
             width: 376.75,
-            height: 66,
-
+            height: 95,
+            decoration: BoxDecoration(
+              borderRadius : BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),color: Color(0xfffff9e9),
+            ),
             child: ElevatedButton(
 
                 child: Text(
-                  "Sign in!",
+                  "Search food!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Allan',
                     fontWeight: FontWeight.w500,
-                    color: Colors.red,
+                    color: Colors.black,
                     fontSize: 32,
                   ),
                 ),
                 onPressed: (){
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignDo()),
+                    MaterialPageRoute(builder: (context) => const Justfood()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   elevation:0,
                   primary: Color(0xfffff9e9),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
+
                 )
             ),
 
