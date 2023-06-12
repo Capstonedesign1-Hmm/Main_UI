@@ -1,0 +1,9 @@
+Scaffold(
+        backgroundColor: Color(0xffFFAB48), //Colors.amber
+        body: Center(
+          child: SpinKitFadingCircle(
+            color: Color(0xffFFF9EA),
+            size: 100.0,
+          ),
+        ),
+      );

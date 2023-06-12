@@ -1,3 +1,4 @@
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 import 'login_do.dart';
 import 'sign_do.dart';
@@ -56,14 +57,14 @@ class _MyHomePage extends State<MyHomePage>{
             width: 411,
             height: 69,
             color: Color(0xfffff9e9),
-            padding: const EdgeInsets.only(left: 17, right: 338, top: 9, bottom: 11, ),
+            padding: const EdgeInsets.only(left: 17, right: 338, top: 9, bottom: 10, ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.end,
               children:[
                 Container(
-                  child: Image.asset('assets/images/meal_icon1.png', width: 55.94, height: 49),
+                  child: Image.asset('assets/images/meal_icon1.png', width: 55.94, height: 55),
                 ),
               ],
             ),

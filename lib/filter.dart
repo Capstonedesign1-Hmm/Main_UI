@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'Searchfood.dart';
-class Filter extends StatelessWidget{
+import 'Foodlist.dart';
+
+class Filter extends StatefulWidget {
   const Filter({Key? key}) : super(key: key);
+
+  @override
+  _FilterState createState() => _FilterState();
+}
+
+class _FilterState extends State<Filter>{
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context){
     return Scaffold(
-        body:Center(// Figma Flutter Generator Login_pageWidget - GROUP
+        body:new Form(// Figma Flutter Generator Login_pageWidget - GROUP
+            key: formKey,
             child: Stack(
                 children: <Widget>[Container(
                 width: 411,
@@ -94,6 +103,7 @@ class Filter extends StatelessWidget{
                               fontSize: 24,
                               letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                               fontWeight: FontWeight.normal,
+                              fontStyle:FontStyle.italic,
                               height: 1
                           ),)
                       ),Positioned(
@@ -344,7 +354,7 @@ class Filter extends StatelessWidget{
                                 onPressed: (){
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const Searchfood()),
+                                    MaterialPageRoute(builder: (context) => const Foodlist()),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -470,43 +480,10 @@ class Filter extends StatelessWidget{
                               )
                           )
                       ),
-                      Positioned(
-                          top: 118,
-                          left: 36,
-                          child: Column(
-                              children: <Widget>[Container(
-                                  child: new Flexible(
-                                    child: new TextField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Search..',
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(color: Color.fromRGBO(167, 167, 167, 1)),
-                                        ),
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(color: Color.fromRGBO(167, 167, 167, 1)),
-                                        ),
-                                      ),
-                                      autofocus: true,
-                                      style: TextStyle(color: Colors.black,fontSize: 18),
-                                      cursorColor: Colors.black,
-                                    ),
-                                  ),
-                                  width: 300,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    borderRadius : BorderRadius.only(
-                                      topLeft: Radius.circular(7),
-                                      topRight: Radius.circular(7),
-                                      bottomLeft: Radius.circular(7),
-                                      bottomRight: Radius.circular(7),
-                                    ),
-                                    color : Color.fromRGBO(240, 240, 240, 1),
-
-                                  )//TextField 크기
-                              ),
+                      _showEmailInput(),
                               ]))]
-                ))
-            ])));
+                )));
+
     /*
     return MaterialApp(
       home:
@@ -514,5 +491,41 @@ class Filter extends StatelessWidget{
 
      */
 
+  }
+  Widget _showEmailInput(){
+    return Positioned(
+      top: 118,
+      left: 36,
+      child: Column(
+        children: <Widget>[Container(
+      child: new Flexible(
+      child: new TextField(
+      decoration: InputDecoration(
+        hintText: 'Search..',
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromRGBO(167, 167, 167, 1)),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Color.fromRGBO(167, 167, 167, 1)),
+        ),
+      ),
+      autofocus: true,
+      style: TextStyle(color: Colors.black,fontSize: 18),
+      cursorColor: Colors.black,
+    ),
+    ),
+    width: 300,
+    height: 30,
+    decoration: BoxDecoration(
+    borderRadius : BorderRadius.only(
+    topLeft: Radius.circular(7),
+    topRight: Radius.circular(7),
+    bottomLeft: Radius.circular(7),
+    bottomRight: Radius.circular(7),
+    ),
+    color : Color.fromRGBO(240, 240, 240, 1),
+
+    )//TextField 크기
+    )]));
   }
 }

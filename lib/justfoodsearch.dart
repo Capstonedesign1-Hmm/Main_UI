@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'Searchfood.dart';
+import 'Foodlist.dart';
 
 class Justfood extends StatelessWidget{
   const Justfood({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -342,7 +343,7 @@ class Justfood extends StatelessWidget{
                                 onPressed: (){
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const Searchfood()),
+                                    MaterialPageRoute(builder: (context) => const Foodlist()),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(

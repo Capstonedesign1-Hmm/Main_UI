@@ -30,11 +30,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+  # 권한 확인
+  permission_handler: ^8.3.0
+
+  # 위치 관련 패키지
+  geolocator: ^8.0.5
+
+  # 로딩 라이브러리
+  flutter_spinkit: ^5.2.0
+
+  # http 통신
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +72,9 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/logo_1.png
+    - assets/images/meal_icon1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -77,11 +90,10 @@ flutter:
   fonts:
     - family: Allan
       fonts:
-        - asset: assets/fonts/Allan-Bold.ttf
-          weight: 700
         - asset: assets/fonts/Allan-Regular.ttf
     - family: Arimo
       fonts:
+        - asset: assets/fonts/Arimo-Regular.ttf
         - asset: assets/fonts/Arimo-Bold.ttf
           weight: 700
         - asset: assets/fonts/Arimo-Italic.ttf
@@ -89,7 +101,7 @@ flutter:
         - asset: assets/fonts/Arimo-BoldItalic.ttf
           weight: 700
           style: italic
-        - asset: assets/fonts/Arimo-Regular.ttf
+
 
 
   # fonts:
