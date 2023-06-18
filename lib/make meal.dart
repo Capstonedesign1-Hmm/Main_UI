@@ -114,7 +114,7 @@ class Makemeal extends StatelessWidget{
                 onPressed: (){
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Justfood()),
+                    MaterialPageRoute(builder: (context) => Justfood()),
                   );
                 },
                 style: ElevatedButton.styleFrom(

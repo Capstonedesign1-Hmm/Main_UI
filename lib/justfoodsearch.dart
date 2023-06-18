@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 //import '../code/Foodlist.dart';
+import 'Foodnutri.dart';
+class Justfood extends StatefulWidget {
 
-class Justfood extends StatelessWidget{
-  const Justfood({Key? key}) : super(key: key);
+  @override
+  _Justfood createState() => _Justfood();
+}
 
+class _Justfood extends State<Justfood>{
+
+var k=0;
+var inputText;
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -50,39 +57,6 @@ class Justfood extends StatelessWidget{
                               fontWeight: FontWeight.normal,
                               height: 1
                           ),)
-                      ),Positioned(
-                          top: 734,
-                          left: 16.8768310546875,
-                          child:Container(
-                            width: 377.2463684082031,
-                            height: 106,
-                            child: ElevatedButton(
-
-                                child: Text(
-                                  'Make meal!',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontFamily: 'Allan',
-                                      fontSize: 40,
-                                      color: Colors.black,
-                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                      fontWeight: FontWeight.normal,
-                                      height: 1
-                                    //fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  elevation:0,
-                                  primary: Color.fromRGBO(255, 170, 72, 1),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(7),
-                                  ),
-                                )
-                            ),
-
-                          )
                       ),Positioned(
                           top: 0,
                           left: 0,
@@ -230,13 +204,23 @@ class Justfood extends StatelessWidget{
                           )
                       ),
                       Positioned(
+                          top : 247,
+                          left : 35,
+                          child : foodinfor(inputText,context),
+                      )
+                      ,Positioned(
                           top: 118,
                           left: 36,
                           child: Column(
                               children: <Widget>[Container(
                                   child: new Flexible(
                                     child: new TextField(
+                                    onChanged: (text) {
+    setState(() {
+    inputText = text;
+    });},
                                       decoration: InputDecoration(
+
                                         hintText: 'Search..',
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: Color.fromRGBO(167, 167, 167, 1)),
@@ -244,6 +228,9 @@ class Justfood extends StatelessWidget{
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(color: Color.fromRGBO(167, 167, 167, 1)),
                                         ),
+                              icon: Padding(
+                                  padding: EdgeInsets.only(right: 0),
+                                  child: Icon(Icons.search)),
                                       ),
                                       autofocus: true,
                                       style: TextStyle(color: Colors.black,fontSize: 18),
@@ -274,4 +261,114 @@ class Justfood extends StatelessWidget{
      */
 
   }
+}
+
+
+Widget foodinfor(k,BuildContext context){
+  if(k=='spaghetti'){
+    return Column
+      (children: <Widget>[
+      Positioned(
+          top: 0,
+          left: 0,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('크림치즈스파게티', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/1.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+              top: 120,
+              left: 184,
+              child:Container(
+                  width: 156,
+                  height: 51,
+                  child: ElevatedButton(
+
+                      child: Text(
+                        'information',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontFamily: 'Arimo',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1,
+                          color: Color.fromRGBO(255, 255, 255, 1),
+
+
+                          //fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Foodnutri()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation:0,
+                        primary: Color.fromRGBO(78, 134, 52, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                      )
+                  ))),
+                  ]
+              )
+          )
+      ),SizedBox(height:20)
+
+      ,
+    ]);}
+  else return       // Figma Flutter Generator Group2Widget - GROUP
+    Container(
+        width: 400,
+        height: 500,
+
+        child: Stack(
+            children: <Widget>[
+              Positioned(
+                  top: 450,
+                  left: 40,
+                  child: Text('Can’t found food!\nCheck food name again', textAlign: TextAlign.center, style: TextStyle(
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      fontFamily: 'Arimo Hebrew Subset Italic',
+                      fontSize: 24,
+                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                      fontWeight: FontWeight.normal,
+                      height: 1
+                  ),)
+              ),Positioned(
+                top: 250,
+                left: 91,
+                child: Container(
+
+                  child: Image.asset('assets/images/image5.png', width: 150, height: 150),
+                ),
+
+
+              ),
+            ]
+        )
+    );
 }

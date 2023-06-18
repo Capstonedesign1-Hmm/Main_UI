@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 //import '../code/Foodlist.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'dart:async';
+import 'Loding_page.dart';
+import 'Foodnutri.dart';
 
 class Filter extends StatefulWidget {
   const Filter({Key? key}) : super(key: key);
@@ -21,6 +25,7 @@ class _FilterState extends State<Filter>{
   '김치', '나물', '채소', '장'];
   String? _selectValue = '';
   Infor infor = new Infor();
+
 
 
 
@@ -119,7 +124,7 @@ class _FilterState extends State<Filter>{
                                                     onPressed: (){
                                                       Navigator.push(
                                                         context,
-                                                        MaterialPageRoute(builder: (context) => Foodlist(infor)),
+                                                        MaterialPageRoute(builder: (context) => Loding(infor)),
                                                       );
                                                     },
                                                     style: ElevatedButton.styleFrom(
@@ -465,7 +470,7 @@ class _FilterState extends State<Filter>{
                                                                     if(Color1 == Color(0xff766359)){
                                                                       setState((){
                                                                         Color1 = Color(0xff4E8634);
-                                                                        infor.nation='korean';
+                                                                        infor.nation='Korean';
                                                                       });
                                                                     }
                                                                     else{
@@ -744,8 +749,14 @@ class _FilterState extends State<Filter>{
                       child: Row(
                           children: <Widget>[Container(
                               child: new Flexible(
-                                child: new TextField(
-                                  decoration: InputDecoration(
+                                child: new TextField(  keyboardType: TextInputType.number,
+                                  onChanged: (text){
+                                    infor.calorie = 500;
+                                    if(infor.protein == 100) {
+                                      infor.protein = 0;
+                                    }
+                                  },
+                                 decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(color: Color.fromRGBO(167, 167, 167, 1)),
                                     ),
@@ -774,7 +785,11 @@ class _FilterState extends State<Filter>{
                             Container(
                                 child: new Flexible(
                                   child: new TextField(
-                                    decoration: InputDecoration(
+                                keyboardType: TextInputType.number,
+                                    onChanged: (text){
+                                      infor.calorie=400;
+                                      },
+                                   decoration: InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(color: Color.fromRGBO(167, 167, 167, 1)),
                                       ),
@@ -812,6 +827,8 @@ class _FilterState extends State<Filter>{
   }
 
 }
+
+
 
 class Foodlist extends StatelessWidget{
   final Infor infor;
@@ -867,7 +884,7 @@ class Foodlist extends StatelessWidget{
                             child: ElevatedButton(
 
                                 child: Text(
-                                  'Make meal!',
+                                  'again!',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontFamily: 'Allan',
                                       fontSize: 40,
@@ -878,7 +895,10 @@ class Foodlist extends StatelessWidget{
                                   ),
                                 ),
                                 onPressed: (){
-                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Filter()),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   elevation:0,
@@ -920,8 +940,8 @@ class Foodlist extends StatelessWidget{
                       ),
                 Positioned(
                     top : 147,
-                    left : 0,
-                    child : foodinfor(infor)),
+                    left : 35,
+                    child : foodinfor(infor,context)),
                     ]
                 )
             )));
@@ -935,36 +955,23 @@ class Foodlist extends StatelessWidget{
   }
 }
 
-Widget foodinfor(infor){
-  if(infor.nation == 'korean'){
+Widget foodinfor(infor,BuildContext context){
+  if(infor.nation == 'Western'){
   return Column
         (children: <Widget>[
         Positioned(
-            top: 7,
+            top: 0,
             left: 0,
             child: Container(
-                width: 411,
-                height: 14,
-                decoration: BoxDecoration(
-                  image : DecorationImage(
-                      image: AssetImage('assets/images/Statusbarheroiphone40portraitwhite2x1.png'),
-                      fit: BoxFit.fitWidth
-                  ),
-                )
-            )
-        ),Positioned(
-            top: 147,
-            left: 35,
-            child: Container(
                 width: 340,
-                height: 131,
+                height: 170,
 
                 child: Stack(
                     children: <Widget>[
                       Positioned(
                           top: 0,
                           left: 0,
-                          child: Text(infor.nation, textAlign: TextAlign.left, style: TextStyle(
+                          child: Text('크림치즈스파게티', textAlign: TextAlign.left, style: TextStyle(
                               color: Color.fromRGBO(0, 0, 0, 1),
                               fontFamily: 'Arimo Hebrew Subset Italic',
                               fontSize: 24,
@@ -973,26 +980,85 @@ Widget foodinfor(infor){
                               height: 1
                           ),)
                       ),Positioned(
-                          top: 39,
-                          left: 0,
+                          top: 29,
+                          left: -30,
                           child: Container(
-                              width: 173.53334045410156,
-                              height: 92,
-                              decoration: BoxDecoration(
-                                borderRadius : BorderRadius.only(
-                                  topLeft: Radius.circular(7),
-                                  topRight: Radius.circular(7),
-                                  bottomLeft: Radius.circular(7),
-                                  bottomRight: Radius.circular(7),
-                                ),
-                                image : DecorationImage(
-                                    image: AssetImage('assets/images/Rectangle15.png'),
-                                    fit: BoxFit.fitWidth
-                                ),
-                              )
-                          )
+
+                              child: Image.asset('assets/images/1.jpg', width:200, height: 160),
+                            ),
+
+
                       ),Positioned(
-                          top: 60,
+                          top: 120,
+                          left: 194,
+                          child:Container(
+                              width: 156,
+                              height: 51,
+                              child: ElevatedButton(
+
+                                  child: Text(
+                                    'information',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontFamily: 'Arimo',
+                                      fontSize: 24,
+                                      letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                      fontWeight: FontWeight.normal,
+                                      height: 1,
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+
+
+                                      //fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                  onPressed: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Foodnutri()),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation:0,
+                                    primary: Color.fromRGBO(78, 134, 52, 1),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(7),
+                                    ),
+                                  )
+                              ))),
+                    ]
+                )
+            )
+        ),SizedBox(height:20),
+        Positioned(
+            top: 202,
+            left: 35,
+            child: Container(
+                width: 340,
+                height: 170,
+
+                child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                          top: 0,
+                          left: 0,
+                          child: Text('감자고로케', textAlign: TextAlign.left, style: TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontFamily: 'Arimo Hebrew Subset Italic',
+                              fontSize: 24,
+                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                              fontWeight: FontWeight.normal,
+                              height: 1
+                          ),)
+                      ),Positioned(
+                        top: 29,
+                        left: -30,
+                        child: Container(
+
+                          child: Image.asset('assets/images/2.jpg', width:200, height: 160),
+                        ),
+
+
+                      ),Positioned(
+                          top: 120,
                           left: 194,
                           child: Container(
                               width: 145,
@@ -1035,173 +1101,981 @@ Widget foodinfor(infor){
                     ]
                 )
             )
-        ),Positioned(
-            top: 302,
-            left: 35,
-            child: Container(
-                width: 340,
-                height: 131,
+        ),SizedBox(height:20),
+    Positioned(
+        top: 202,
+        left: 35,
+        child: Container(
+            width: 340,
+            height: 170,
 
-                child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                          top: 0,
-                          left: 0,
-                          child: Text('Tomato Soup', textAlign: TextAlign.left, style: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontFamily: 'Arimo Hebrew Subset Italic',
-                              fontSize: 24,
-                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.normal,
-                              height: 1
-                          ),)
-                      ),Positioned(
-                          top: 39,
-                          left: 0,
-                          child: Container(
-                              width: 173.53334045410156,
-                              height: 92,
-                              decoration: BoxDecoration(
-                                borderRadius : BorderRadius.only(
-                                  topLeft: Radius.circular(7),
-                                  topRight: Radius.circular(7),
-                                  bottomLeft: Radius.circular(7),
-                                  bottomRight: Radius.circular(7),
-                                ),
-                                image : DecorationImage(
-                                    image: AssetImage('assets/images/Rectangle17.png'),
-                                    fit: BoxFit.fitWidth
-                                ),
-                              )
-                          )
-                      ),Positioned(
-                          top: 60,
-                          left: 195,
-                          child: Container(
-                              width: 145,
-                              height: 51,
+            child: Stack(
+                children: <Widget>[
+                  Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Text('참치샌드위치', textAlign: TextAlign.left, style: TextStyle(
+                          color: Color.fromRGBO(0, 0, 0, 1),
+                          fontFamily: 'Arimo Hebrew Subset Italic',
+                          fontSize: 24,
+                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                          fontWeight: FontWeight.normal,
+                          height: 1
+                      ),)
+                  ),Positioned(
+                    top: 29,
+                    left: -30,
+                    child: Container(
 
-                              child: Stack(
-                                  children: <Widget>[
-                                    Positioned(
-                                        top: 0,
-                                        left: 0,
-                                        child: Container(
-                                            width: 145,
-                                            height: 51,
-                                            decoration: BoxDecoration(
-                                              borderRadius : BorderRadius.only(
-                                                topLeft: Radius.circular(7),
-                                                topRight: Radius.circular(7),
-                                                bottomLeft: Radius.circular(7),
-                                                bottomRight: Radius.circular(7),
-                                              ),
-                                              color : Color.fromRGBO(78, 134, 52, 1),
-                                            )
+                      child: Image.asset('assets/images/3.jpg', width:200, height: 160),
+                    ),
+
+
+                  ),Positioned(
+                      top: 120,
+                      left: 194,
+                      child: Container(
+                          width: 145,
+                          height: 51,
+
+                          child: Stack(
+                              children: <Widget>[
+                                Positioned(
+                                    top: 0,
+                                    left: 0,
+                                    child: Container(
+                                        width: 145,
+                                        height: 51,
+                                        decoration: BoxDecoration(
+                                          borderRadius : BorderRadius.only(
+                                            topLeft: Radius.circular(7),
+                                            topRight: Radius.circular(7),
+                                            bottomLeft: Radius.circular(7),
+                                            bottomRight: Radius.circular(7),
+                                          ),
+                                          color : Color.fromRGBO(78, 134, 52, 1),
                                         )
-                                    ),Positioned(
-                                        top: 11,
-                                        left: 11,
-                                        child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
-                                            color: Color.fromRGBO(255, 255, 255, 1),
-                                            fontFamily: 'Arimo Hebrew Subset Italic',
-                                            fontSize: 24,
-                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                            fontWeight: FontWeight.normal,
-                                            height: 1
-                                        ),)
-                                    ),
-                                  ]
-                              )
-                          )
-                      ),
-                    ]
-                )
-            )
-        ),Positioned(
-            top: 457,
-            left: 35,
-            child: Container(
-                width: 340,
-                height: 131,
-
-                child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                          top: 0,
-                          left: 0,
-                          child: Text('Cajun Chicken Salad', textAlign: TextAlign.left, style: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontFamily: 'Arimo Hebrew Subset Italic',
-                              fontSize: 24,
-                              letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.normal,
-                              height: 1
-                          ),)
-                      ),Positioned(
-                          top: 39,
-                          left: 0,
-                          child: Container(
-                              width: 173.53334045410156,
-                              height: 92,
-                              decoration: BoxDecoration(
-                                borderRadius : BorderRadius.only(
-                                  topLeft: Radius.circular(7),
-                                  topRight: Radius.circular(7),
-                                  bottomLeft: Radius.circular(7),
-                                  bottomRight: Radius.circular(7),
+                                    )
+                                ),Positioned(
+                                    top: 11,
+                                    left: 11,
+                                    child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        fontFamily: 'Arimo Hebrew Subset Italic',
+                                        fontSize: 24,
+                                        letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1
+                                    ),)
                                 ),
-                                image : DecorationImage(
-                                    image: AssetImage('assets/images/Rectangle20.png'),
-                                    fit: BoxFit.fitWidth
-                                ),
-                              )
+                              ]
                           )
-                      ),Positioned(
-                          top: 60,
-                          left: 195,
-                          child: Container(
-                              width: 145,
-                              height: 51,
-
-                              child: Stack(
-                                  children: <Widget>[
-                                    Positioned(
-                                        top: 0,
-                                        left: 0,
-                                        child: Container(
-                                            width: 145,
-                                            height: 51,
-                                            decoration: BoxDecoration(
-                                              borderRadius : BorderRadius.only(
-                                                topLeft: Radius.circular(7),
-                                                topRight: Radius.circular(7),
-                                                bottomLeft: Radius.circular(7),
-                                                bottomRight: Radius.circular(7),
-                                              ),
-                                              color : Color.fromRGBO(78, 134, 52, 1),
-                                            )
-                                        )
-                                    ),Positioned(
-                                        top: 11,
-                                        left: 11,
-                                        child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
-                                            color: Color.fromRGBO(255, 255, 255, 1),
-                                            fontFamily: 'Arimo Hebrew Subset Italic',
-                                            fontSize: 24,
-                                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                            fontWeight: FontWeight.normal,
-                                            height: 1
-                                        ),)
-                                    ),
-                                  ]
-                              )
-                          )
-                      ),
-                    ]
-                )
+                      )
+                  ),
+                ]
             )
-        ),]);}
+        )
+    ),]);}
+  else if(infor.nation == 'Chinese'){
+    return Column
+      (children: <Widget>[
+      Positioned(
+          top: 0,
+          left: 0,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('기스면', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/4.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),SizedBox(height:20),
+      Positioned(
+          top: 202,
+          left: 35,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('고추잡채', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/5.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),SizedBox(height:20),
+      Positioned(
+          top: 202,
+          left: 35,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('난자완스', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/6.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),]);}
+  else if(infor.nation == 'Korean' && infor.calorie == 0){
+    return Column
+      (children: <Widget>[
+      Positioned(
+          top: 0,
+          left: 0,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('쌀밥', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/7.jpeg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),SizedBox(height:20),
+      Positioned(
+          top: 202,
+          left: 35,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('소고기미역국', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/8.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),SizedBox(height:20),
+      Positioned(
+          top: 202,
+          left: 35,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('고추튀김', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/9.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),]);}
+  else if(infor.nation == 'Korean' && infor.calorie == 500){
+    return Column
+      (children: <Widget>[
+      Positioned(
+          top: 0,
+          left: 0,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('멸치주먹밥', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/10.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),SizedBox(height:20),
+      Positioned(
+          top: 202,
+          left: 35,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('미소된장국', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/11.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),SizedBox(height:20),
+      Positioned(
+          top: 202,
+          left: 35,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('메추리알장조림', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/12.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),]);}
+  else if(infor.nation == 'Korean'&& infor.calorie == 400){
+    return Column
+      (children: <Widget>[
+      Positioned(
+          top: 0,
+          left: 0,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('쌀밥', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/7.jpeg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),SizedBox(height:20),
+      Positioned(
+          top: 202,
+          left: 35,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('떡만둣국', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/14.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),SizedBox(height:20),
+      Positioned(
+          top: 202,
+          left: 35,
+          child: Container(
+              width: 340,
+              height: 170,
+
+              child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text('돼지등갈비찜', textAlign: TextAlign.left, style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Arimo Hebrew Subset Italic',
+                            fontSize: 24,
+                            letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                            fontWeight: FontWeight.normal,
+                            height: 1
+                        ),)
+                    ),Positioned(
+                      top: 29,
+                      left: -30,
+                      child: Container(
+
+                        child: Image.asset('assets/images/13.jpg', width:200, height: 160),
+                      ),
+
+
+                    ),Positioned(
+                        top: 120,
+                        left: 194,
+                        child: Container(
+                            width: 145,
+                            height: 51,
+
+                            child: Stack(
+                                children: <Widget>[
+                                  Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: Container(
+                                          width: 145,
+                                          height: 51,
+                                          decoration: BoxDecoration(
+                                            borderRadius : BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            color : Color.fromRGBO(78, 134, 52, 1),
+                                          )
+                                      )
+                                  ),Positioned(
+                                      top: 11,
+                                      left: 11,
+                                      child: Text('infomation', textAlign: TextAlign.left, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Arimo Hebrew Subset Italic',
+                                          fontSize: 24,
+                                          letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                                          fontWeight: FontWeight.normal,
+                                          height: 1
+                                      ),)
+                                  ),
+                                ]
+                            )
+                        )
+                    ),
+                  ]
+              )
+          )
+      ),]);}
   else return       // Figma Flutter Generator Group2Widget - GROUP
       Container(
         width: 400,
@@ -1211,7 +2085,7 @@ Widget foodinfor(infor){
             children: <Widget>[
             Positioned(
             top: 350,
-            left: 70,
+            left: 40,
             child: Text('Can’t found food!\nCheck food name again', textAlign: TextAlign.center, style: TextStyle(
                 color: Color.fromRGBO(0, 0, 0, 1),
             fontFamily: 'Arimo Hebrew Subset Italic',
@@ -1222,7 +2096,7 @@ Widget foodinfor(infor){
         ),)
   ),Positioned(
   top: 150,
-  left: 121,
+  left: 91,
   child: Container(
 
    child: Image.asset('assets/images/image5.png', width: 150, height: 150),
